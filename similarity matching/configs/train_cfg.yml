@@ -1,0 +1,34 @@
+training:
+  # Model's setting
+  embedding_size: 128
+  batch_size: 128
+  require_backbone_grad: True
+  margin: 0.1
+
+  # Dataloader's setting
+  num_workers: 8
+
+  # The initial learning rate to use for training.
+  learning_rate: 0.001
+
+  epochs: 20
+
+  train_ratio: 0.8
+  validation_ratio: 0.2
+
+data:
+  root: "F:/label_data_final"
+  data_cache: "./training_cache" # store the imgs_list, training and validation data
+  imgs_list: "imgs_list.txt" # just a name for the txt file containing all the image's name
+  save_data: True # save training data and validation data to data_cache, only save the text file containinng the image name
+
+logging:
+  log_every_n_steps: 2
+  save_dir: "logs/" # save folder for logs, can be use with tensorboard later
+
+checkpoint:
+  # Save folder for model's checkpoint
+  save_dir: "./output"
+
+  # Save top k model:
+  k: 2
