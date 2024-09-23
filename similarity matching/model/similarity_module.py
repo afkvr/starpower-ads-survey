@@ -27,11 +27,15 @@ class ProjectionHead(nn.Module):
         return self.Head(X)
         
 class ContrastiveEmbedding(nn.Module): 
-    def __init__(self, embedding_size=128): 
+    def __init__(self, embedding_size=128, req_grad=False): 
         super(ContrastiveEmbedding, self).__init__()
-
+        self.req_grad = req_grad
+        
         resnet = models.resnet50(weights=ResNet50_Weights.DEFAULT)
         self.backbone = nn.Sequential(*list(resnet.children())[:-1])
+
+        for params in self.backbone.parameters():
+            params.requires_grad = self.req_grad
 
         self.encoder_features = resnet.fc.in_features
         self.embedding_size = embedding_size
@@ -44,18 +48,12 @@ class ContrastiveEmbedding(nn.Module):
         features1 = torch.flatten(self.backbone(X1), 1)
         embedding1 = self.ProjectionHead(features1)
 
-        if X2 is None: 
-            return embedding1
-        else:
-            features2 = torch.flatten(self.backbone(X2), 1)
-            embedding2 = self.ProjectionHead(features2)
 
-            return embedding1, embedding2
+        return embedding1
 
 class LightContrastiveEmbedding(nn.Module): 
     def __init__(self, embedding_size=128, req_grad=False): 
         super(LightContrastiveEmbedding, self).__init__()
-
         self.req_grad = req_grad
 
         resnet = models.resnet18(weights=ResNet18_Weights.DEFAULT)
@@ -64,8 +62,8 @@ class LightContrastiveEmbedding(nn.Module):
         self.encoder_features = resnet.fc.in_features
         self.embedding_size = embedding_size
         
-        for param in self.backbone.parameters():
-            param.requires_grad = self.req_grad
+        for params in self.backbone.parameters():
+            params.requires_grad = self.req_grad
 
 
         self.ProjectionHead = nn.Sequential(
@@ -74,14 +72,10 @@ class LightContrastiveEmbedding(nn.Module):
         )
 
     def forward(self, X1):
-
         embedding1 = torch.flatten(self.backbone(X1), start_dim=1)
         embedding1 = self.ProjectionHead(embedding1)
 
         return embedding1
-
-
-
 
 
 # Debug
@@ -97,4 +91,3 @@ if __name__=="__main__":
 
 
     print(embedding.shape)
-
