@@ -46,7 +46,7 @@ if __name__=="__main__":
     config = load_config("./configs/train_cfg.yml")
 
     root = config['data']['root']
-    data_cache = config['data']['data_cahce']
+    data_cache = config['data']['data_cache']
     img_list = config['data']['imgs_list']
 
     os.makedirs(data_cache, exist_ok=True)
