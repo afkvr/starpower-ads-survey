@@ -22,6 +22,12 @@ If you want to run process immediately, just run "automation_PTS.exe"
 
 # Preprocess parameters
 Before run script, we need define some keyboard shortcuts and parameters below:
+## OpenAI API key for ChatGPT Validation
+Please paste OpenAI API key into script "automation_PTS.au3" here
+```bash
+Global $apiKey = "" 
+```
+
 ## Photoshop parameters
 1 - Keyboard shortbut: Select "Edit" > "Keyboard ShortCut" (Edit shortcut here)
     - "Quick save as PNG": Select "File" > save "Quick save as PNG" as "Shift + Ctrl + Alt + Q"
