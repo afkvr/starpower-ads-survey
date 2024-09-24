@@ -1,13 +1,15 @@
 from PIL import Image
 from torch.utils.data import Dataset
 import torch
-from .constant import LABEL2ID
+
+import os
 
 class CustomDataset(Dataset):
     def __init__(self, imgs, root, transform = None):
         self.imgs = imgs
         self.root = root
         self.transform = transform
+        self.L2I = {value: key for key, value in enumerate(os.listdir(root))}
 
     def __len__(self):
         return len(self.imgs)
@@ -15,7 +17,7 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx):
         img = self.imgs[idx]
         set_ = img.split("_")[0]
-        label = LABEL2ID[set_]
+        label = self.L2I[set_]
 
         input_img = Image.open(f"{self.root}/{set_}/{img}")
 
