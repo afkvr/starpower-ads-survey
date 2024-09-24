@@ -40,16 +40,16 @@ class ContrastiveEmbedding(nn.Module):
         self.encoder_features = resnet.fc.in_features
         self.embedding_size = embedding_size
         
+        self.ProjectionHead = nn.Sequential(
+            nn.Dropout(0.1),
+            nn.Linear(self.encoder_features, self.embedding_size)
+        )
 
-        self.ProjectionHead = ProjectionHead(self.encoder_features, self.embedding_size)
+    def forward(self, X1):
+        embedding = torch.flatten(self.backbone(X1), start_dim=1)
+        embedding = self.ProjectionHead(embedding1)
 
-    def forward(self, X1, X2=None):
-
-        features1 = torch.flatten(self.backbone(X1), 1)
-        embedding1 = self.ProjectionHead(features1)
-
-
-        return embedding1
+        return embedding
 
 class LightContrastiveEmbedding(nn.Module): 
     def __init__(self, embedding_size=128, req_grad=False): 
@@ -72,10 +72,10 @@ class LightContrastiveEmbedding(nn.Module):
         )
 
     def forward(self, X1):
-        embedding1 = torch.flatten(self.backbone(X1), start_dim=1)
-        embedding1 = self.ProjectionHead(embedding1)
+        embedding = torch.flatten(self.backbone(X1), start_dim=1)
+        embedding = self.ProjectionHead(embedding)
 
-        return embedding1
+        return embedding
 
 
 # Debug
