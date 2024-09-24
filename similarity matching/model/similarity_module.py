@@ -45,9 +45,9 @@ class ContrastiveEmbedding(nn.Module):
             nn.Linear(self.encoder_features, self.embedding_size)
         )
 
-    def forward(self, X1):
-        embedding = torch.flatten(self.backbone(X1), start_dim=1)
-        embedding = self.ProjectionHead(embedding1)
+    def forward(self, X):
+        embedding = torch.flatten(self.backbone(X), start_dim=1)
+        embedding = self.ProjectionHead(embedding)
 
         return embedding
 
@@ -71,8 +71,8 @@ class LightContrastiveEmbedding(nn.Module):
             nn.Linear(self.encoder_features, self.embedding_size)
         )
 
-    def forward(self, X1):
-        embedding = torch.flatten(self.backbone(X1), start_dim=1)
+    def forward(self, X):
+        embedding = torch.flatten(self.backbone(X), start_dim=1)
         embedding = self.ProjectionHead(embedding)
 
         return embedding
