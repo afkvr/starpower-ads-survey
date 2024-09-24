@@ -6,6 +6,7 @@ pip install -r requirements.txt
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 #install torch with cuda independently 
 ```
 **Data format:** <br>
+```bash
 \ROOT
 +---set1
 |       set1_1.jpg
@@ -19,6 +20,7 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 |       set2_3.jpg
 |
 \---set3
+```
 ...
 Notice: 
  &nbsp;&nbsp;&nbsp;&nbsp;Set's name shouldn't contain any " _ " symbol. <br>
