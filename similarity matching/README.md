@@ -26,7 +26,6 @@ Notice:
  &nbsp;&nbsp;&nbsp;&nbsp;Set's name shouldn't contain any " _ " symbol. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;Images of set "a" must has the naming format: seta_index.ext. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;Images names shouldn't contain more than one " _ " symbol. <br>
- ```
 **Data augmentation:** <br>
 To augment data in the dataset, run the augmentation.py script in the dataset folder. <br>
 The data augmentation consist of 5 transformation: rotation by +5 and -5 degree, Gaussian noise injection and two color adjustments transformation.
