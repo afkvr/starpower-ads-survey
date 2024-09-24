@@ -20,8 +20,8 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 |       set2_3.jpg
 |
 \---set3
-```
 ...
+```
 Notice: 
  &nbsp;&nbsp;&nbsp;&nbsp;Set's name shouldn't contain any " _ " symbol. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;Images of set "a" must has the naming format: seta_index.ext. <br>
