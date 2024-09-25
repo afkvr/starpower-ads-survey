@@ -81,5 +81,6 @@ if __name__=="__main__":
 
         if iset == pred: 
             correct +=1 
-
+            
+    print(f"Correct prediction: {correct}/{sample_size}")
     print(f"Top {k} accuracy: {correct/sample_size: .2f}")
