@@ -12,11 +12,11 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 def parse_arguments(): 
 
     parser = argparse.ArgumentParser(
-        description="Create vector database."
+        description="Evaluating embedding model's few-shot learning ability."
     )
 
     parser.add_argument(
-        "-t", "--test", type=str, nargs="?", help="Path to test images", default="./root"
+        "-t", "--test", type=str, nargs="?", help="Path to test images folder."
     )
 
     parser.add_argument(
@@ -24,7 +24,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "-e", "--embedder", type=str, nargs="?", help="Path to the embedding model, default is ./checkpoints."
+        "-e", "--embedder", type=str, nargs="?", help="Path to the embedding model."
     )
 
     parser.add_argument(
@@ -32,7 +32,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "-k", "--k_neighbors", type=int, nargs="?", help="Number of nearst neighbors to perform majority vote, default is 3", default=3
+        "-k", "--k_neighbors", type=int, nargs="?", help="Number of nearst neighbors to perform majority vote, default is 3.", default=3
     )
 
     return parser.parse_args()
