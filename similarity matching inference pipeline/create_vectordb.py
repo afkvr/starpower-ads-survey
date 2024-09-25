@@ -16,7 +16,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "-r", "--refs", type=str, nargs="?", help="Path to images", default="./refs"
+        "-r", "--refs", type=str, nargs="?", help="Path to reference images."
     )
 
     parser.add_argument(
@@ -24,7 +24,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "-e", "--embedder", type=str, nargs="?", help="Path to the embedding model, default is ./checkpoints."
+        "-e", "--embedder", type=str, nargs="?", help="Path to the embedding model."
     )
 
     parser.add_argument(
