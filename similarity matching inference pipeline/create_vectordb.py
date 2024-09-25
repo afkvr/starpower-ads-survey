@@ -16,7 +16,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "-r", "--refs", type=str, nargs="?", help="Path to reference images."
+        "-r", "--refs", type=str, nargs="?", help="Path to reference images folder."
     )
 
     parser.add_argument(
