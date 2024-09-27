@@ -3,6 +3,9 @@ import argparse
 
 import faiss
 from tqdm import tqdm
+import torch
+
+from torchmetrics import F1Score, Accuracy
 
 from inference import predicition
 from model.utils import load_model
@@ -70,8 +73,16 @@ if __name__=="__main__":
 
 
     # Evaluation
-    sample_size = len(images)
-    correct = 0
+        #Defining evaluation metrics
+    LABEL2ID = {key: value for value, key in enumerate(sets)}
+    num_classes = len(sets)
+    avg="micro"
+    task="multiclass"
+    f1  = F1Score(task=task, average=avg, num_classes=num_classes)
+    acc = Accuracy(task=task, average=avg, num_classes=num_classes)
+
+    labels = [] 
+    preds = []
     for img in tqdm(images, desc="ETA"):
 
         iset = img.split("_")[0]
@@ -79,8 +90,11 @@ if __name__=="__main__":
 
         pred = predicition(image=abs_path, embedder=embedder, index_mapping=index_mapping, vectordb=vectordb, k=k)
 
-        if iset == pred: 
-            correct +=1 
-            
-    print(f"Correct prediction: {correct}/{sample_size}")
-    print(f"Top {k} accuracy: {correct/sample_size: .2f}")
+        labels.append(LABEL2ID[iset])
+        preds.append(LABEL2ID[pred])
+
+    labels = torch.tensor(labels)
+    preds = torch.tensor(preds)
+
+    print(f"Top {k} accuracy:{acc(preds, labels).item(): .2f}")
+    print(f"Top {k} f1-score:{f1(preds, labels).item(): .2f}")
