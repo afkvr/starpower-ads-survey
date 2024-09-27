@@ -72,4 +72,4 @@ python create_vectordb.py -r .../ROOT/refs_data -e .../checkpoint/model.ckpt -s 
 ```
 python evaluation.py -t ...\ROOT\test_data -e .../checkpoints/sep23.ckpt -d .../vectordb -k 3 -s 128
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;The script return top k accuracy on the test set given a reference vector database. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;The script return top k accuracy and f1-score on the test set given a reference vector database. <br>
