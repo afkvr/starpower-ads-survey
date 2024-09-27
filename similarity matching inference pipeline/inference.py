@@ -12,6 +12,9 @@ def predicition(image, embedder, index_mapping, vectordb , k=3):
 
     D, I = vectordb.search(q, k)
     res = I.squeeze().tolist()
+    if k == 1: 
+        return index_mapping[res].split("_")[0]
+        
     pred = most_common([index_mapping[r].split("_")[0] for r in res])
 
     return pred
