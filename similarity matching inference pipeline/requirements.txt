@@ -1,4 +1,5 @@
 faiss==1.8.0
 numpy==1.24.3
 Pillow==10.4.0
+torchmetrics==1.4.0.post0
 tqdm==4.66.5
