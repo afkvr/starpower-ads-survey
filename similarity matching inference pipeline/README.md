@@ -44,7 +44,7 @@ Notice: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Download the [model](https://drive.google.com/file/d/1Wxi7Mgm5jcakCYWlS0F9MtGkkS3okhTN/view?usp=drive_link). <br>
 &nbsp;&nbsp;&nbsp;&nbsp;Create a checkpoints folder and put the model inside. <br>
 **Inference pipeline** <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;First, a vector database must be created by running the create_vectordb script: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;First, a vector database must be created by running the create_vectordb script. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;The script has several arguments: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. -r or --refs :Path to the reference images folder. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. -p or --path_db :Path to store the database afterward, default is ./vectordb. <br>
