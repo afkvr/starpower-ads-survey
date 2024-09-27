@@ -31,5 +31,5 @@ Notice: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;The data augmentation consist of 5 transformation: rotation by +5 and -5 degree, Gaussian noise injection and two color adjustments transformation.
 ```
 cd dataset 
-python augmentation.py #change the "root" variable in line 37 to your dataset's root first.
+python augmentation.py -r .../root #root is path to dataset
 ```
