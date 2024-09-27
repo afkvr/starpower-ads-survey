@@ -2,6 +2,7 @@ from PIL import Image, ImageEnhance
 import numpy as np
 import random
 import os
+import argparse
 
 # Rotation and Flipping
 def rotate(image):
@@ -22,7 +23,6 @@ def adjust_colors(image):
     enhancers = [
         ImageEnhance.Brightness(image),
         ImageEnhance.Contrast(image),
-        ImageEnhance.Color(image)
     ]
     
     # Random adjustments
@@ -31,10 +31,20 @@ def adjust_colors(image):
 
     return [brightness_img, contrast_img]
 
+def parse_argument(): 
+    parser = argparse.ArgumentParser(
+        description="Data augmentation script."
+    )
+
+    parser.add_argument(
+        "-r", "--root", type=str, nargs="?", help="Dataset path."
+    )
+
 
 if __name__ == "__main__":
-
-    root = ""
+    
+    args = parse_arguments()
+    root = args.root
 
     sets = os.listdir(root)
 
