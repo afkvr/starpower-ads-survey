@@ -1,0 +1,72 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: /home/ubuntu/object_detect_yolo/data/object_custom # dataset root dir
+train: train # train images (relative to 'path') 4 images
+val: test # val images (relative to 'path') 4 images
+test: test # test images (optional)
+
+# Classes
+names:
+    0: smartphone
+    1: license_plate
+    2: weapon
+    3: boat
+    4: hand
+    5: coin
+    6: man
+    7: game_building
+    8: flower
+    9: accessory
+    10: avatar
+    11: latte
+    12: map
+    13: chair
+    14: child
+    15: cup
+    16: game_skin
+    17: bubble
+    18: comic_book_character
+    19: equipment
+    20: hair
+    21: animal
+    22: face
+    23: skull
+    24: card_game
+    25: insect
+    26: woman
+    27: superhero
+    28: game
+    29: website
+    30: boot
+    31: garment
+    32: star
+    33: beverage
+    34: eye
+    35: flag
+    36: car
+    37: laptop
+    38: picture_frame
+    39: diamond
+    40: cleaning_product
+    41: shoe
+    42: person
+    43: curtain
+    44: cartoon_character
+    45: product
+    46: game_items
+    47: flyer
+    48: bottle
+    49: linen
+    50: game_controller
+    51: sock
+    52: tie
+    53: perfume
+    54: goggles
+    55: illustration
+    56: pillow
+    57: game_skill
+    58: skill_graph
+    59: doll
+    60: donut
+    61: toy
+    62: badge
+    63: arm
