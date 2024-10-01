@@ -1,0 +1,2 @@
+Replace DualTransform for DualIAATransform (albumentations==0.5.2 to 1.4.11 )
+from albumentations.core.utils import to_tuple (instead of olc code)

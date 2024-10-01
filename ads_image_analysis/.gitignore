@@ -1,0 +1,6 @@
+*.env
+*/script/Detextor/pretrained_models/*
+*/SAM_script/checkpoints/*
+*/SAM_script/tesseractdata/*
+*/Font_classifier/checkpoints/*
+*__pycache__*

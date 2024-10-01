@@ -1,6 +1,13 @@
 *.pt*
+*.pth*
+*.cpkt*
 *__pycache__*
 */RetinaFace_tf2/data/
 */RetinaFace_tf2/gender-age-data/
 */detect_text_OCR/tessdata/
 *log*
+*.env
+*/Detextor/pretrained_models/*
+*/SAM_script/checkpoints/*
+*/SAM_script/tesseractdata/*
+*/Font_classifier/checkpoints/*

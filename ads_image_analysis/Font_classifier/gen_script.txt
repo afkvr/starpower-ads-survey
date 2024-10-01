@@ -1,0 +1,1 @@
+python run.py -c 120000 -w 5 -rf "32,128" -tc "#000000,#FFFFFF" -bl 1 -rbl -r --output_dir F:\test_font --thread_count 8 --character_spacing 1 --font_dir F:\henet_font
