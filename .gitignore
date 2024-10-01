@@ -1,2 +1,6 @@
 *.pt*
 *__pycache__*
+*/RetinaFace_tf2/data/
+*/RetinaFace_tf2/gender-age-data/
+*/detect_text_OCR/tessdata/
+*log*
