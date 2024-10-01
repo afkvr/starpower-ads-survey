@@ -326,96 +326,96 @@ def main():
 
             print(data_GSA_filter)
             image_metadata["Object-bound"] = data_GSA_filter
-            # sam_predictor.set_image(image_source)
+            sam_predictor.set_image(image_source)
             # Remove background for element
             value = 0  # 0 for background
-            # boxes_filt = torch.tensor([data_tmp["box"]
-            #                           for data_tmp in data_GSA_filter])
-            # boxes_filt = np.array([data_tmp["box"] for data_tmp in data_GSA_filter])
+            boxes_filt = torch.tensor([data_tmp["box"]
+                                      for data_tmp in data_GSA_filter])
+            boxes_filt = np.array([data_tmp["box"] for data_tmp in data_GSA_filter])
             # print(boxes_filt)
 
-            # transformed_boxes = sam_predictor.transform.apply_boxes_torch(
-            #     boxes_filt, image.shape[:2]).to(DEVICE)
-            # print(transformed_boxes[0])
-            # sys.exit()
-            # mask_list, scores, logits_sam = sam_predictor.predict_torch(
-            #     point_coords=None,
-            #     point_labels=None,
-            #     boxes=transformed_boxes.to(DEVICE),
-            #     multimask_output=False,
-            #     # multimask_output=True,
-            #     return_logits=True,
-            # )
-            # sys.exit()
-            # print(logits_sam.shape)
-            # print(logits_sam[0].shape)
-            # for idx in range(len(data_GSA_filter)):
-            #     # mask_img = torch.zeros(image_source.shape[-2:])
-            #     data_tmp = data_GSA_filter[idx]
-            #     box = np.array(data_tmp["box"])
-            #     # mask_input_tmp = logits_sam[idx][0,:,:]
-            #     # print(transformed_boxes[idx].cpu().numpy())
-            #     masks, _, _ = sam_predictor.predict(
-            #         point_coords=None,
-            #         point_labels=None,
-            #         box=box[None,:],
-            #         multimask_output=False,
-            #     )
-            #     h, w = masks[0].shape[-2:]
-            #     # # cv2.imwrite(f"/tmp/mask_{idx}.png", mask_list_tmp[0])
-            #     #
-            #     masks = masks[0].reshape(h, w, 1)
-            #     mask_img = masks*255
-            #     plt.figure(figsize=(10, 10))
-            #     # plt.imshow(image)
-            #     draw_mask(masks, plt.gca())
-            #     # show_box(box, plt.gca())
-            #     plt.axis('off')
-            #     plt.show()
-            #     # mask_img = mask_img.numpy()
-            #     mask_img_crop = mask_img[box[1]:box[3], box[0]:box[2]]
-            #     output_save_crop = f"""{text_img_folder}/{data_tmp["input_text"]}_{idx}_final.png"""
-            #     crop_image = image_source[box[1]:box[3], box[0]:box[2]]
-            #     cv2.imwrite(
-            #         f"""{text_img_folder}/{data_tmp["input_text"]}_{idx}_crop.png""", crop_image)
-            #     cv2.imwrite(
-            #         f"""{text_img_folder}/{data_tmp["input_text"]}_{idx}_mask.png""", mask_img_crop)
-            #     rgba = np.dstack((crop_image, mask_img_crop))
-            #     cv2.imwrite(output_save_crop, rgba)
+            transformed_boxes = sam_predictor.transform.apply_boxes_torch(
+                boxes_filt, image.shape[:2]).to(DEVICE)
+            print(transformed_boxes[0])
+            sys.exit()
+            mask_list, scores, logits_sam = sam_predictor.predict_torch(
+                point_coords=None,
+                point_labels=None,
+                boxes=transformed_boxes.to(DEVICE),
+                multimask_output=False,
+                # multimask_output=True,
+                return_logits=True,
+            )
+            sys.exit()
+            print(logits_sam.shape)
+            print(logits_sam[0].shape)
+            for idx in range(len(data_GSA_filter)):
+                # mask_img = torch.zeros(image_source.shape[-2:])
+                data_tmp = data_GSA_filter[idx]
+                box = np.array(data_tmp["box"])
+                # mask_input_tmp = logits_sam[idx][0,:,:]
+                # print(transformed_boxes[idx].cpu().numpy())
+                masks, _, _ = sam_predictor.predict(
+                    point_coords=None,
+                    point_labels=None,
+                    box=box[None,:],
+                    multimask_output=False,
+                )
+                h, w = masks[0].shape[-2:]
+                # # cv2.imwrite(f"/tmp/mask_{idx}.png", mask_list_tmp[0])
+                #
+                masks = masks[0].reshape(h, w, 1)
+                mask_img = masks*255
+                plt.figure(figsize=(10, 10))
+                # plt.imshow(image)
+                draw_mask(masks, plt.gca())
+                # show_box(box, plt.gca())
+                plt.axis('off')
+                plt.show()
+                # mask_img = mask_img.numpy()
+                mask_img_crop = mask_img[box[1]:box[3], box[0]:box[2]]
+                output_save_crop = f"""{text_img_folder}/{data_tmp["input_text"]}_{idx}_final.png"""
+                crop_image = image_source[box[1]:box[3], box[0]:box[2]]
+                cv2.imwrite(
+                    f"""{text_img_folder}/{data_tmp["input_text"]}_{idx}_crop.png""", crop_image)
+                cv2.imwrite(
+                    f"""{text_img_folder}/{data_tmp["input_text"]}_{idx}_mask.png""", mask_img_crop)
+                rgba = np.dstack((crop_image, mask_img_crop))
+                cv2.imwrite(output_save_crop, rgba)
 
-            # ####Visualize image
-            # # Object bound
-            # # tmp_image = image.copy()
-            # # # boolean indexing and assignment based on mask
-            # # tmp_image[rmbg_text !=0] = color_annotated["object_bound"]
-            # # image = cv2.addWeighted(tmp_image, 0.5, image, 0.5, 0)
-            # if image_metadata["Design-elements"] != []:
-            #     for obj_tmp  in image_metadata["Design-elements"]:
-            #         print(obj_tmp)
-            #         # cv2.rectangle(image,obj_tmp["location"][0], obj_tmp["location"][1] , color_annotated["design"], 2)
-            #         # image_bg[obj_tmp["location"][0][1]:obj_tmp["location"][1][1],obj_tmp["location"][0][0]:obj_tmp["location"][1][0] ] =0
-            #         cv2.rectangle(image,obj_tmp["text_location"][0], obj_tmp["text_location"][1] , color_annotated["text_design"], 2)
-            #         cv2.putText(image,obj_tmp["text"], [obj_tmp["text_location"][0][0],obj_tmp["location"][0][1] -10],cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,255,0),2,cv2.LINE_AA)
-            #         # image_bg[obj_tmp["text_location"][0][1]:obj_tmp["text_location"][1][1],obj_tmp["text_location"][0][0]:obj_tmp["text_location"][1][0] ] =0
-            # if image_metadata["Text-normal"] != []:
-            #     for obj_tmp  in image_metadata["Text-normal"]:
-            #         print(obj_tmp)
-            #         cv2.rectangle(image,obj_tmp["location"][0], obj_tmp["location"][1], color_annotated["text_normal"], 2)
-            #         # image_bg[obj_tmp["location"][0][1]:obj_tmp["location"][1][1],obj_tmp["location"][0][0]:obj_tmp["location"][1][0] ] =0
-            #         cv2.putText(image,obj_tmp["text"], [obj_tmp["location"][0][0],obj_tmp["location"][0][1] -10],cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,255,0),2,cv2.LINE_AA)
-            # cv2.imwrite(f"{text_img_folder}/{image_name}_visualize.png", image)
-            # bg_only = np.dstack((image, image_bg))
-            # # print(bg_only.shape, image.shape, image_bg.shape)
-            # cv2.imwrite(f"{text_img_folder}/{image_name}_background.png",bg_only)
+            ###Visualize image
+            # Object bound
+            tmp_image = image.copy()
+            # boolean indexing and assignment based on mask
+            tmp_image[rmbg_text !=0] = color_annotated["object_bound"]
+            # image = cv2.addWeighted(tmp_image, 0.5, image, 0.5, 0)
+            if image_metadata["Design-elements"] != []:
+                for obj_tmp  in image_metadata["Design-elements"]:
+                    print(obj_tmp)
+                    # cv2.rectangle(image,obj_tmp["location"][0], obj_tmp["location"][1] , color_annotated["design"], 2)
+                    image_bg[obj_tmp["location"][0][1]:obj_tmp["location"][1][1],obj_tmp["location"][0][0]:obj_tmp["location"][1][0] ] =0
+                    cv2.rectangle(image,obj_tmp["text_location"][0], obj_tmp["text_location"][1] , color_annotated["text_design"], 2)
+                    cv2.putText(image,obj_tmp["text"], [obj_tmp["text_location"][0][0],obj_tmp["location"][0][1] -10],cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,255,0),2,cv2.LINE_AA)
+                    image_bg[obj_tmp["text_location"][0][1]:obj_tmp["text_location"][1][1],obj_tmp["text_location"][0][0]:obj_tmp["text_location"][1][0] ] =0
+            if image_metadata["Text-normal"] != []:
+                for obj_tmp  in image_metadata["Text-normal"]:
+                    print(obj_tmp)
+                    cv2.rectangle(image,obj_tmp["location"][0], obj_tmp["location"][1], color_annotated["text_normal"], 2)
+                    image_bg[obj_tmp["location"][0][1]:obj_tmp["location"][1][1],obj_tmp["location"][0][0]:obj_tmp["location"][1][0] ] =0
+                    # cv2.putText(image,obj_tmp["text"], [obj_tmp["location"][0][0],obj_tmp["location"][0][1] -10],cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,255,0),2,cv2.LINE_AA)
+            cv2.imwrite(f"{text_img_folder}/{image_name}_visualize.png", image)
+            bg_only = np.dstack((image, image_bg))
+            # print(bg_only.shape, image.shape, image_bg.shape)
+            cv2.imwrite(f"{text_img_folder}/{image_name}_background.png",bg_only)
 
             # #Save medata
             final_metadata = {
                 "data": image_metadata
             }
             # print(final_metadata)
-            # path_final_output = f"{text_img_folder}/{image_name}_metadata.json"
-            # with open(path_final_output ,'w') as fp:
-            #     json.dump(final_metadata, fp, indent=4, cls=NpEncoder)
+            path_final_output = f"{text_img_folder}/{image_name}_metadata.json"
+            with open(path_final_output ,'w') as fp:
+                json.dump(final_metadata, fp, indent=4, cls=NpEncoder)
 
 
 DEVICE = "cpu"
@@ -424,10 +424,10 @@ ckpt_filenmae = "/media/anlab/data/GroundingDINO-0.1.0-alpha2/weights/checkpoint
 ckpt_config_filename = "/media/anlab/data/GroundingDINO-0.1.0-alpha2/groundingdino/config/GroundingDINO_SwinL.py"
 groundingdino_model = load_model(f"{groundingdino_path}/groundingdino/config/GroundingDINO_SwinT_OGC.py",
                                  f"{groundingdino_path}/weights/groundingdino_swint_ogc.pth")
-# sam = sam_model_registry["vit_h"](checkpoint="/media/anlab/data/segment-anything/checkpoints/sam_hq_vit_h.pth")
-# # sam = sam_model_registry["vit_l"](checkpoint="/media/anlab/data/segment-anything/checkpoints/sam_vit_l_0b3195.pth")
-# sam.to(device="cpu")
-# sam_predictor = SamPredictor(sam)
+sam = sam_model_registry["vit_h"](checkpoint="/media/anlab/data/segment-anything/checkpoints/sam_hq_vit_h.pth")
+# sam = sam_model_registry["vit_l"](checkpoint="/media/anlab/data/segment-anything/checkpoints/sam_vit_l_0b3195.pth")
+sam.to(device="cpu")
+sam_predictor = SamPredictor(sam)
 # dalle_inpainter = DalleInpainter()
 # # mask_generator = SamAutomaticMaskGenerator(sam)
 
