@@ -13,11 +13,12 @@ def predicition(image, embedder, index_mapping, vectordb , k=3):
     D, I = vectordb.search(q, k)
     res = I.squeeze().tolist()
     if k == 1: 
-        return index_mapping[res].split("_")[0]
-        
-    pred = most_common([index_mapping[r].split("_")[0] for r in res])
+        return index_mapping[res].split("_")[0], index_mapping[res]
+    
+    neighbors = [index_mapping[r] for r in res]
+    pred = most_common([neighbor.split("_")[0] for neighbor in neighbors])
 
-    return pred
+    return pred, neighbors
 
 # Example: 
 if __name__ =="__main__":
