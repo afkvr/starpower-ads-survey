@@ -24,7 +24,7 @@ def predicition(image, embedder, index_mapping, vectordb , k=3):
 if __name__ =="__main__":
 
     image = "path_to_image"
-    embedder = load_model(checkpoint_path="./checkpoints/....")
+    embedder = load_model(checkpoint_path="./checkpoints/....", embeding_size=128)
 
     # Load in index file and vector database
     with open (".../vectordb/index.txt", "r", encoding="utf-8") as f: 
