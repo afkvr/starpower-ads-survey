@@ -9,7 +9,7 @@ This folder use [Autoit3](https://www.autoitscript.com/site/autoit/downloads/) t
 # Portable version
 If you want to run process immediately, just run "**automation_PTS.exe**"
 
-# Pipeline of inpainting
+# Pipeline of inpainting with input bounding box
 1. Open image file > Select All > Transform Selection > Fullfill box information > Expand bounding box.
 2. Inpaint with 2 methods:
     - Generative Fill:
@@ -19,6 +19,15 @@ If you want to run process immediately, just run "**automation_PTS.exe**"
     - Content-aware fill: Return only 1 result for selected region.
 3. Repeat step 2 for each text/object box and save results to output folder.
 3. Save final result.
+
+# Pipeline of inpainting with input mask
+1. Open image > Start custom action (Shift+F10)
+2. Stat custom actions (Shift+F9):
+    - Place image mask layer(should be PNG) > Select color range
+    - Expand selection (5-10 pixels)
+    - Run "Generative Fill" > Evaluating by ChatGPT > Save best result.
+3. Delete mask layer of current image > Repeat step 2 for each text/object box and save results to output folder.
+4. Save final result.
 
 # Preprocess parameters
 Before run script, we need define some keyboard shortcuts and parameters below:
@@ -38,10 +47,14 @@ Global $apiKey = ""
             - “**Color Adaption**”: “High”
             - “**Rotation Adaptation**”: “None”
     - "**Expand selection**": Select "**Select**" > save "**Expand**" as  "**Shift + Ctrl + Alt + F1**"
+    - Run action: **Generative Fill with input mask and expand** as "**Shift + F10**"
+    - Run action: **Delete mask layer of current image** as "**Shift + F9**"
 2. Disable some function/window:
     - "Keep ratio between width and height of selection box": Select "**Select**" > Transform selection > Disable button between box "**W**" and box "**H**".
     - Expand "**Generative fill**" validation window enough to show all 3 generations.
 3. Open and save 1 image into folder we want to save to make Photoshop know input/output folder.
+4. Add 3 action files in folder "action_files" into Adobe Photoshop actions folder (Example: C:\Users\Owner\AppData\Roaming\Adobe\Adobe Photoshop 2024\Presets\Actions )
+
 
 ## Automation script parameters
 Because each Window machine will display PTS screen in different resolution, so we need pre-define coordinates for some parameters below before start script:
