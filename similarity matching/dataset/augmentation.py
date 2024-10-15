@@ -39,6 +39,7 @@ def parse_argument():
     parser.add_argument(
         "-r", "--root", type=str, nargs="?", help="Dataset path."
     )
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
