@@ -43,7 +43,7 @@ def parse_argument():
 
 if __name__ == "__main__":
     
-    args = parse_arguments()
+    args = parse_argument()
     root = args.root
 
     sets = os.listdir(root)
