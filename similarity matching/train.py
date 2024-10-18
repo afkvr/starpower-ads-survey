@@ -86,7 +86,7 @@ if __name__=="__main__":
     validation_loader =  DataLoader(validation_dataset, batch_size=batch_size, shuffle=False, num_workers= num_workers,  persistent_workers= pwt)
 
     # Define model
-    model = EncoderWrapper(model=LightContrastiveEmbedding(embedding_size= config['training']['embedding_size'], req_grad=config['training']['require_backbone_grad']),
+    model = EncoderWrapper(model=ContrastiveEmbedding(embedding_size= config['training']['embedding_size'], req_grad=config['training']['require_backbone_grad']),
                         embedding_size= config['training']['embedding_size'],
                         margin=config['training']['margin'],
                         learning_rate=config['training']['learning_rate'],
