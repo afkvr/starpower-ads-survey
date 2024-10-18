@@ -13,8 +13,11 @@ to_tensor = T.Compose([
     T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-def load_model(checkpoint_path, embeding_size): 
-    model = LightContrastiveEmbedding(embedding_size=embeding_size)
+def load_model(checkpoint_path, embeding_size, model_type): 
+    if model_type == "light":
+        model = LightContrastiveEmbedding(embedding_size=embeding_size)
+    else: 
+        model = ContrastiveEmbedding(embedding_size=embeding_size)
     checkpoint = torch.load(checkpoint_path, weights_only=True)
     
     
