@@ -10,14 +10,17 @@ from model.similarity_module import LightContrastiveEmbedding
 to_tensor = T.Compose([
     T.ToTensor(),
     T.Resize((224, 224)),
+    T.Grayscale(3),
     T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
 def load_model(checkpoint_path, embeding_size, model_type): 
+
     if model_type == "light":
         model = LightContrastiveEmbedding(embedding_size=embeding_size)
     else: 
         model = ContrastiveEmbedding(embedding_size=embeding_size)
+
     checkpoint = torch.load(checkpoint_path, weights_only=True)
     
     
@@ -39,6 +42,16 @@ def get_embedding(img, model):
         embedding = F.normalize(model(input_img.unsqueeze(0)), p=2, dim=1)
 
     return embedding.squeeze(0).numpy()
+
+def get_embedding_gpu(img, model): 
+    model.eval()
+    input_img = Image.open(img)
+    input_img = to_tensor(input_img).unsqueeze(0)
+
+    with torch.no_grad(): 
+        embedding = F.normalize(model(input_img.to("cuda")), p=2, dim=1)
+
+    return embedding.cpu().squeeze(0).numpy()
 
 def most_common(lst):
     return max(set(lst), key=lst.count)
