@@ -66,6 +66,7 @@ if __name__ == "__main__":
 
 
     # Create vector database
+    # Create vector database
     embeddings = []
 
     for img in tqdm(images, desc="Creating database"):
@@ -74,13 +75,9 @@ if __name__ == "__main__":
         embeddings.append(embedding)
 
     embeddings = np.array(embeddings)
-    order = np.arange(embeddings.shape[0])
 
-
-    index = faiss.IndexFlatIP(d)
-    index = faiss.IndexIDMap(index)
-    index.add_with_ids(embeddings, order)
-
+    index = faiss.IndexFlatL2(d)
+    index.add(embeddings)
 
     faiss.write_index(index, f"{save_root}/vectors.bin")
 
